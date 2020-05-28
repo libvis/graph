@@ -1,10 +1,30 @@
 
 <div align="center">
-    <img width="312px" alt="libvis logo" src="http://webvis.dev/logo.png"/>
+    <img width="312px" alt="libvis logo" src="http://libvis.dev/libvis-sm.png"/>
 </div>
 
-This is a graph [libvis](http://libvis.dev) module
+This is a graph [libvis](http://libvis.dev) module.
+
+![](demo.png)
 
 # Installation
 
-`webvis_mods install gh:/libvis/graph`
+```
+libvis-mods download gh:libvis/graph
+cd graph
+libvis-mods install
+```
+
+# Usage 
+
+```python
+from libvis import Vis
+from libvis.modules import graph
+
+vis = Vis()
+vis.start()
+
+vis.vars.test = graph()
+```
+
+The state of `vis.vars.test` will be visualised live at `localhost:7000/`. 
