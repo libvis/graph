@@ -1,0 +1,9 @@
+.graph-presenter{
+    height: 100%;
+    width: 100%;
+}
+
+.module-container {
+    height: 100px;
+    flex-grow: 1;
+}
