@@ -1,5 +1,5 @@
 modname = graph
-get_path = webvis-mods where
+get_path = libvis-mods where
 front_src = $(shell $(get_path) --front)
 back_src = $(shell $(get_path) --back)
 
