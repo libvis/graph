@@ -26,12 +26,10 @@ class graph(BaseModule):
     def vis_get(self, key):
         value = self[key]
         value = graph_to_d3json(value)
-        print('sending value to front: ', key, value)
         return value
 
     def vis_set(self, key, value):
         super().vis_set(key, value) # same as self[key] = value
-        print('updated value form front: ', key, value)
 
     @classmethod
     def test_object(cls):

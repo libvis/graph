@@ -25,10 +25,9 @@ export default class Presenter extends React.Component
   componentDidUpdate:()=>
     console.log 'componentDidUpdate', @props
 
-    graph = JSON.parse @props.data?.graph
-    Gv.update data: graph, sim:@sim, style:nodeColor:'blue'
-
-
+    if @props.data?.graph
+      graph = JSON.parse @props.data.graph
+      Gv.update data: graph, sim:@sim, style:nodeColor:'blue'
 
 
   shouldComponentUpdate:()->
@@ -40,11 +39,11 @@ export default class Presenter extends React.Component
       ref: (el)=> @container = el
       className:'module-container'
       id:'graph-c'
+      if not @props.data?.graph
+        L.div '', 'No data. Required `graph` property'
       L.svg
         id:'graph-vis'
         className:'graph-vis'
         width:'100%'
         height:'100%'
         preserveAspectRatio='none'
-
-
