@@ -19,12 +19,12 @@ libvis-mods install
 
 ```python
 from libvis import Vis
-from libvis.modules import graph
+from libvis.modules import Graph
 
 vis = Vis()
 vis.start()
 
-vis.vars.test = graph()
+vis.vars.test = Graph.test_object()
 ```
 
 The state of `vis.vars.test` will be visualised live at `localhost:7000/`. 

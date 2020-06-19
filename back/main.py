@@ -16,24 +16,19 @@ def graph_to_d3json(graph):
     res = json.dumps(data)
     return res
 
-
-
-class graph(BaseModule):
+class Graph(BaseModule):
     name="graph"
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, graph):
+        super().__init__(graph=graph)
 
     def vis_get(self, key):
         value = self[key]
         value = graph_to_d3json(value)
         return value
 
-    def vis_set(self, key, value):
-        super().vis_set(key, value) # same as self[key] = value
-
     @classmethod
     def test_object(cls):
-        n = cls()
+        n = cls(None)
         n.graph = nx.barabasi_albert_graph(23, 1)
         n.graph.node[0]['color']='red'
         n.graph.node[1]['color']='blue'
