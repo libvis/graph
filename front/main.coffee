@@ -8,11 +8,13 @@ export default class Presenter extends React.Component
   constructor:(props)->
     super(props)
     console.log 'constructor', props
+    @svg_id = 'A' + Math.random().toString().substring(7)
 
   componentDidMount:()->
     console.log 'componentDidMount', @props
 
     @sim = Gv.start
+        svg_id: '#'+@svg_id
         data:{links:[], nodes:[]}
         style:
           nodeColor: 'blue'
@@ -27,8 +29,11 @@ export default class Presenter extends React.Component
 
     if @props.data?.graph
       graph = JSON.parse @props.data.graph
-      Gv.update data: graph, sim:@sim, style:nodeColor:'blue'
-
+      Gv.update
+        svg_id: '#'+@svg_id
+        data: graph
+        sim:@sim,
+        style:nodeColor:'blue'
 
   shouldComponentUpdate:()->
     console.log 'shouldComponentUpdate'
@@ -42,7 +47,7 @@ export default class Presenter extends React.Component
       if not @props.data?.graph
         L.div '', 'No data. Required `graph` property'
       L.svg
-        id:'graph-vis'
+        id: @svg_id
         className:'graph-vis'
         width:'100%'
         height:'100%'

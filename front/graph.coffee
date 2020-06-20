@@ -42,11 +42,11 @@ remove_nodes=(nodes,fun)->
   console.log 'removed',trm
   trm.remove()
 
-export updNodes=(data)->
+export updNodes=(svg, data)->
   console.log 'updating nodes',data
   new_ids = data.map (n)->n.id
 
-  svg = d3.select('#graph-vis')
+  #svg = d3.select('#graph-vis')
   nodes = svg.selectAll('g.nodes .node')
   old_data = nodes.data()
   old_ids = old_data.map (n)->n.id
@@ -65,12 +65,11 @@ export updNodes=(data)->
   console.log 'newnodes', node
   node
 
-export updLinks=(data)->
+export updLinks=(svg, data)->
   console.log 'updlinks', data
   console.log 'updlinks', data
   new_ids = data.map (n)->n.id
 
-  svg = d3.select('#graph-vis')
   links = svg.selectAll('g.links .link')
   old_data = links.data()
   old_ids = old_data.map (n)->n.id
@@ -89,10 +88,10 @@ export updLinks=(data)->
     
   link
 
-export update=({data,style,onClick,sim,onMouseOver})->
+export update=({svg_id, data,style,onClick,sim,onMouseOver})->
   #data = JSON.parse(JSON.stringify(data))
   {links,nodes}=data
-  svg = d3.select('#graph-vis')
+  svg = d3.select(svg_id)
   # vis is container for everyitng
   links = links.map (n)-> if n.id then n else {n..., id:n.source+'.'+n.target}
 
@@ -116,10 +115,10 @@ export update=({data,style,onClick,sim,onMouseOver})->
     sim_links_dict[n.id] = n
   links = links.map (n)-> if sim_links_dict[n.id] then {sim_links_dict[n.id]..., n...} else n
 
-  node = updNodes nodes
+  node = updNodes svg, nodes
   node = svg.selectAll('g.nodes .node')
   console.log 'all nodes', node
-  link = updLinks links
+  link = updLinks svg, links
   link = svg.selectAll('g.links .link')
   console.log 'link', link
   node = svg.selectAll('g.nodes .node')
@@ -151,12 +150,12 @@ export update=({data,style,onClick,sim,onMouseOver})->
   f=()->sim.alpha(0.01).restart()
   setTimeout f, 200
 
-export start=({data,style,onClick,onMouseOver, center})->
+export start=({svg_id, data,style,onClick,onMouseOver, center})->
   if not center
     center = x:250, y: 150
   data = JSON.parse(JSON.stringify(data))
   {links,nodes}=data
-  svg = d3.select('#graph-vis')
+  svg = d3.select(svg_id)
   svg.selectAll("*").remove()
   # vis is container for everyitng
   g = svg.append("g")
