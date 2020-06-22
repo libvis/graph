@@ -13,7 +13,10 @@ req_py:
 	pip3 install -r py_requirements.txt --user
 
 req_js:
-	cd $(front_src)/$(modname) &&\
-		cat js_requirements.txt | xargs yarn add
-
-
+	if [ -x "$(yarn --version)" ]; then \
+		cd $(front_src)/$(modname) &&\
+			cat js_requirements.txt | xargs yarn add ;\
+	lse\
+		d $(front_src)/$(modname) &&\
+			cat js_requirements.txt | xargs npm i ;\
+	fi
