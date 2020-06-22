@@ -16,7 +16,7 @@ req_js:
 	if [ -x "$(yarn --version)" ]; then \
 		cd $(front_src)/$(modname) &&\
 			cat js_requirements.txt | xargs yarn add ;\
-	lse\
+	else\
 		d $(front_src)/$(modname) &&\
 			cat js_requirements.txt | xargs npm i ;\
 	fi
