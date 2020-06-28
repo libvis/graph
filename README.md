@@ -7,6 +7,10 @@ This is a graph [libvis](http://libvis.dev) module.
 
 ![](demo.png)
 
+---
+
+![](demo2.gif)
+
 # Installation
 
 ```
