@@ -17,6 +17,6 @@ req_js:
 		cd $(front_src)/$(modname) &&\
 			cat js_requirements.txt | xargs yarn add ;\
 	else\
-		d $(front_src)/$(modname) &&\
+		cd $(front_src)/$(modname) &&\
 			cat js_requirements.txt | xargs npm i ;\
 	fi
